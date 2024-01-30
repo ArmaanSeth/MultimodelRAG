@@ -1,8 +1,6 @@
 from dotenv import load_dotenv
 import streamlit as st
-import uuid
 import base64
-from IPython import display
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores.faiss import FAISS
 from langchain_core.prompts import PromptTemplate
@@ -42,7 +40,8 @@ def generate_ans(question):
       relevant_images.append(d.metadata['orignal_content'])
   result=chain.run({'context':context,"question":question})
   st.write(result)
-  st.image(relevant_images[0])
+  if len(relevant_images)>0:
+    st.image(base64.b64decode(relevant_images[0]))
 
 def main():
     if "chain" not in st.session_state:
@@ -51,7 +50,7 @@ def main():
         st.session_state.vectorstore=get_vectorstore()
     st.set_page_config(page_title="Multimodal RAG", page_icon=":floppy_disk:")
     st.header("Multimodal RAG - HUMAN ANATOMY :man-cartwheeling:")
-    question=st.text_area("Ask anything related to human anatomy")
+    question=st.text_input("Ask anything related to human anatomy")
     if(question):
        generate_ans(question)
    
