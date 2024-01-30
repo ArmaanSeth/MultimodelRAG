@@ -48,7 +48,7 @@ def main():
         st.session_state.chain=get_chain()
     if "vectorstore" not in st.session_state:
         st.session_state.vectorstore=get_vectorstore()
-    st.set_page_config(page_title="Multimodal RAG", page_icon=":floppy_disk:")
+    st.set_page_config(page_title="Multimodal RAG", page_icon="	:muscle:")
     st.header("Multimodal RAG - HUMAN ANATOMY :man-cartwheeling:")
     question=st.text_input("Ask anything related to human anatomy")
     if(question):
