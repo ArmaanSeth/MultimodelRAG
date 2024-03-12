@@ -17,7 +17,7 @@ Answer:"""
 
 def get_vectorstore():
     embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-small-en", model_kwargs={"device": "cpu"}, encode_kwargs={"normalize_embeddings": True})
-    db=FAISS.load_local('./faiss_index',embeddings)
+    db=FAISS.load_local('./faiss_index',embeddings, allow_dangerous_deserialization=True) #added allow_dangerous_deserialization=True
     return db
 
 def get_chain():
